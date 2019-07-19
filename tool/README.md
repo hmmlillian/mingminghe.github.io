@@ -1,18 +1,3 @@
-# SnapCutJS
-<a id="Top"></a>
-
-SnapCut V2 in JavaScript. Interactive image segmentation framework & webpage demo.
-
-<a id="Installation"></a>
-## Installation
-
-<a id="CloneCode"></a>
-### Clone the code
-```
-git lfs install
-git clone --recursive git@github.sc-corp.net:Snapchat/SnapcutJS.git
-```
-
 <a id="Build"></a>
 ### Build (optional)
 ```

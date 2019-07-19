@@ -1,0 +1,517 @@
+
+<html>
+    <head>
+      <title>Progressive Color Transfer with Dense Semantic Correspondences</title>
+  </head>
+    <style type="text/css">
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    li{
+        float: left;
+    }
+
+    li a.nav{
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: #111;
+    }
+    #nav {
+      width: 100%;
+      top:0;
+      position:fixed;
+    }
+	.navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+	}
+
+	.navbar a {
+		float: left;
+		font-size: 16px;
+		color: white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+	}
+
+	.dropdown {
+		float: left;
+		overflow: hidden;
+	}
+
+	.dropdown .dropbtn {
+		font-size: 16px;    
+		border: none;
+		outline: none;
+		color: white;
+		padding: 14px 16px;
+		background-color: inherit;
+		font-family: inherit;
+		margin: 0;
+	}
+
+	.navbar a:hover, .dropdown:hover .dropbtn {
+		background-color: #aaa;
+	}
+
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color: #f9f9f9;
+		min-width: 160px;
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		z-index: 1;
+	}
+
+	.dropdown-content a {
+		float: none;
+		color: black;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+		text-align: left;
+	}
+
+	.dropdown-content a:hover {
+		background-color: #ddd;
+	}
+
+	.dropdown:hover .dropdown-content {
+		display: block;
+	}
+  </style>
+    
+	<body>
+          <div class="navbar" id="application_top">
+    <div class="dropdown">
+    <button class="dropbtn" >Comparison
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="comparison.html#C1">Compared to Luan et al. 2017 & Mechrez et al. 2017</a>
+      <a href="comparison.html#C2">Compared to Liao et al. [2017]</a>
+      <a href="comparison.html#C3">Compared to Arbelot et al. [2017]</a>
+      <a href="comparison.html#C4">Compared to Shih et al. [2014]</a>
+      <a href="comparison.html#C5">Compared to Tong et al. [2007]</a>
+    </div>
+    </div>
+    <div class="dropdown">
+    <button class="dropbtn" >Extension
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="extension.html#M1">Multi-reference Color Transfer</a>
+      <a href="extension.html#M2">Colorization</a>
+    </div>
+    </div> 
+    <div class="dropdown">
+    <button class="dropbtn" style="font-weight: bold;">Application
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="application.html#P1">Makeup</a>
+      <a href="application.html#P2">Time Lapse</a>
+    </div>
+    </div>
+    <a href="limitation.html"  class='nav' >Limitation</a>
+  </div>
+  <p> </p>
+      <p> </p>
+      <p> </p>
+    <div id='makeup'>
+	<a style="font-size:24px; " name="P1">1. Makeup</a>
+	<a style="font-size:24px;" href="application.html#application_top">Go to top</a>
+      <table border="0" style="table-layout: fixed; text-align:center; padding-top: 5px;">
+        <tbody>
+          <tr style="font-size:20px; padding-bottom: 10px">
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word;" valign="top">
+              <p>Source</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Reference</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Result</p>
+            </th>
+             <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Reference</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Result</p>
+            </th>                
+          </tr>        
+          <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/content.jpg" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref1.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res1.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref2.jpg" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res2.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr> 
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref3.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res3.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref4.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res4.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref5.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res5.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref6.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res6.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref7.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res7.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref8.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res8.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref9.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res9.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref10.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res10.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref11.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res11.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/makeup/ref12.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/makeup/res12.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+      </tbody>
+      </table>
+    </div>  
+
+    <p> </p>
+      <p> </p>
+      <p> </p>
+    <div id='makeup'>
+	<a style="font-size:24px; " name="P2">2. Time Lapse</a>
+	<a style="font-size:24px;" href="application.html#application_top">Go to top</a>
+      <table border="0" style="table-layout: fixed; text-align:center; padding-top: 5px;">
+        <tbody>
+          <tr style="font-size:20px; padding-bottom: 10px">
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word;" valign="top">
+              <p>Source</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Reference</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Result</p>
+            </th>
+             <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Reference</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Result</p>
+            </th>                
+          </tr>
+
+           <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+              	<img src="application/timelapse/content.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref0.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res0.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref1.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res1.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref2.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res2.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref3.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res3.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+             <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref4.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res4.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref5.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res5.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+             <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref6.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res6.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref7.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res7.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+             <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref8.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res8.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref9.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res9.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+             <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref10.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res10.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+             <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="application/timelapse/ref11.png" alt='None' style="width:128px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="application/timelapse/res11.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+     </tbody>
+      </table>
+    </div>        	
+  </body>
+</html>

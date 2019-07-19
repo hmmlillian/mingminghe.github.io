@@ -1,0 +1,2522 @@
+
+<html>
+    <head>
+      <title>Progressive Color Transfer with Dense Semantic Correspondences</title>
+  </head>
+    <style type="text/css">
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    li{
+        float: left;
+    }
+
+    li a.nav{
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: #111;
+    }
+    #nav {
+      width: 100%;
+      top:0;
+      position:fixed;
+    }
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+
+  .dropdown .dropbtn {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #aaa;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  </style>
+    
+  <body>
+    <div class="navbar" id="comparison_top">
+    <div class="dropdown">
+    <button class="dropbtn" style="font-weight: bold;">Comparison
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content" >
+      <a href="comparison.html#C1">Compared to Luan et al. 2017 & Mechrez et al. 2017</a>
+      <a href="comparison.html#C2">Compared to Liao et al. [2017]</a>
+      <a href="comparison.html#C3">Compared to Arbelot et al. [2017]</a>
+      <a href="comparison.html#C4">Compared to Shih et al. [2014]</a>
+      <a href="comparison.html#C5">Compared to Tong et al. [2007]</a>
+    </div>
+    </div>
+    <div class="dropdown">
+    <button class="dropbtn" >Extension
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="extension.html#M1">Multi-reference Color Transfer</a>
+      <a href="extension.html#M2">Colorization</a>
+    </div>
+    </div> 
+    <div class="dropdown">
+    <button class="dropbtn">Application
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="application.html#P1">Makeup</a>
+      <a href="application.html#P2">Time Lapse</a>
+    </div>
+    </div>
+    <a href="limitation.html"  class='nav'>Limitation</a>
+  </div>
+
+  <p> </p>
+      <p> </p>
+      <p> </p>
+
+   <div id='deep_compare'>
+    <a style="font-size:24px; " name="C1">1. Compared to Luan et al. [2017] & Mechrez et al. [2017]</a> 
+    <a style="font-size:24px;" href="comparison.html#comparison_top">Go to top</a>
+        <table border="0" style="table-layout: fixed; text-align:center; padding-top: 5px;">
+          <tbody>
+            <tr style="font-size:20px; padding-bottom: 10px">
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word;" valign="top">
+                <p>Source</p>
+              </th>
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+                <p>Reference</p>
+              </th>
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+                <p>Luan et al. [2017]</p>
+              </th>
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+                <p>Mechrez et al. [2017]</p>
+              </th>
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+                <p>Our Result</p>
+              </th>          
+            </tr> 
+
+            <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/deep/input/in_01.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/deep/input/tar_01.png" alt='None' style="width:320px; height:200; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/deep/luan/res_01.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/deep/mechrez/NS_seg_01.jpg" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+               <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/deep/our/res_01.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr> 
+
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_02.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_02.png" alt = "None" style = "width:320px; height:180; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_02.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_02.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_02.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_03.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_03.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_03.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_03.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_03.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_04.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_04.png" alt = "None" style = "width:320px; height:212; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_04.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_04.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_04.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_05.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_05.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_05.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_05.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_05.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_06.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_06.png" alt = "None" style = "width:320px; height:180; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_06.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_06.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_06.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_07.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_07.png" alt = "None" style = "width:320px; height:180; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_07.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_07.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_07.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_08.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_08.png" alt = "None" style = "width:320px; height:212; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_08.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_08.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_08.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_09.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_09.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_09.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_09.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_09.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_10.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_10.png" alt = "None" style = "width:320px; height:170; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_10.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_10.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_10.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_11.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_11.png" alt = "None" style = "width:320px; height:422; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_11.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_11.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_11.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_12.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_12.png" alt = "None" style = "width:320px; height:422; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_12.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_12.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_12.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_13.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_13.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_13.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_13.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_13.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_14.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_14.png" alt = "None" style = "width:320px; height:215; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_14.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_14.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_14_0.00.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+			  <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <p>BDS Weight = 0.00</p>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_15.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_15.png" alt = "None" style = "width:320px; height:215; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_15.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_15.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_15.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_16.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_16.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_16.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_16.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_16.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_17.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_17.png" alt = "None" style = "width:320px; height:180; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_17.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_17.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_17.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_18.png" alt = "None" style = "width:320px; height:400; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_18.png" alt = "None" style = "width:320px; height:400; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_18.png" alt = 'None' style = "width:320px; height:400; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_18.jpg" alt = 'None' style = "width:320px; height:400; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_18.png" alt = 'None' style = "width:320px; height:400; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_19.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_19.png" alt = "None" style = "width:320px; height:200; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_19.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_19.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_19.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_20.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_20.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_20.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_20.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_20.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_21.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_21.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_21.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_21.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_21.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_22.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_22.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_22.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_22.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_22.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_23.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_23.png" alt = "None" style = "width:320px; height:180; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_23.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_23.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_23.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_24.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_24.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_24.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_24.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_24.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_25.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_25.png" alt = "None" style = "width:320px; height:230; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_25.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_25.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_25.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_26.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_26.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_26.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_26.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_26.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_27.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_27.png" alt = "None" style = "width:320px; height:247; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_27.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_27.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_27.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_28.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_28.png" alt = "None" style = "width:320px; height:195; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_28.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_28.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_28.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_29.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_29.png" alt = "None" style = "width:320px; height:180; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_29.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_29.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_29.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_30.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_30.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_30.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_30.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_30.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_31.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_31.png" alt = "None" style = "width:320px; height:215; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_31.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_31.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_31.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_32.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_32.png" alt = "None" style = "width:320px; height:200; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_32.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_32.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_32.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_33.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_33.png" alt = "None" style = "width:320px; height:320; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_33.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_33.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_33.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_34.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_34.png" alt = "None" style = "width:320px; height:222; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_34.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_34.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_34.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_35.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_35.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_35.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_35.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_35.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_36.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_36.png" alt = "None" style = "width:320px; height:272; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_36.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_36.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_36.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_37.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_37.png" alt = "None" style = "width:320px; height:193; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_37.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_37.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_37.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_38.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_38.png" alt = "None" style = "width:320px; height:215; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_38.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_38.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_38.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_39.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_39.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_39.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_39.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_39.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_40.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_40.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_40.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_40.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_40.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_41.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_41.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_41.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_41.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_41.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_42.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_42.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_42.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_42.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_42.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_43.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_43.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_43.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_43.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_43.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_44.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_44.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_44.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_44.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_44.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_45.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_45.png" alt = "None" style = "width:320px; height:290; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_45.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_45.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_45.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_46.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_46.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_46.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_46.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_46.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_47.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_47.png" alt = "None" style = "width:320px; height:215; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_47.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_47.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_47.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_48.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_48.png" alt = "None" style = "width:320px; height:165; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_48.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_48.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_48.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_49.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_49.png" alt = "None" style = "width:320px; height:167; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_49.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_49.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_49.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_50.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_50.png" alt = "None" style = "width:320px; height:180; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_50.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_50.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_50.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_51.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_51.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_51.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_51.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_51.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_52.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_52.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_52.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_52.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_52.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_53.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_53.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_53.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_53.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_53.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_54.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_54.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_54.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_54.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_54.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_55.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_55.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_55.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_55.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_55.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_56.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_56.png" alt = "None" style = "width:320px; height:210; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_56.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_56.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_56.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_57.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_57.png" alt = "None" style = "width:320px; height:210; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_57.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_57.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_57.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_58.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_58.png" alt = "None" style = "width:320px; height:240; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_58.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_58.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_58.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_59.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_59.png" alt = "None" style = "width:320px; height:242; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_59.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_59.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_59.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+              <tr><td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/in_60.png" alt = "None" style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/input/tar_60.png" alt = "None" style = "width:320px; height:213; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/luan/res_60.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/mechrez/NS_seg_60.jpg" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+              <a href = "">
+              <img src = "comparison/deep/our/res_60.png" alt = 'None' style = "width:320px; margin:2px;">
+              </a>
+              </td>
+              </tr>
+
+
+           
+       </tbody>
+        </table>
+      </div>
+
+      <p></p>
+      <p></p>
+      <p></p>
+
+  <div id='liao_compare'>
+    <a style="font-size:24px; " name="C2">2. Compared to Liao et al. [2017]</a>
+    <a style="font-size:24px;" href="comparison.html#comparison_top">Go to top</a>
+        <table border="0" style="table-layout: fixed; text-align:center; padding-top: 5px;">
+          <tbody>
+            <tr style="font-size:20px; padding-bottom: 10px">
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word;" valign="top">
+                <p>Input</p>
+              </th>
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+                <p>References</p>
+              </th>
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+                <p>Liao et al. [2017]</p>
+              </th>
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+                <p>Our Result</p>
+              </th>          
+            </tr>  
+
+            <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/content1.jpg" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/liao/ref1.png" alt='None' style="width:320px; height:240; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_a1.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_o1.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/content2.jpg" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/liao/ref2.jpg" alt='None' style="width:320px; height:212; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_a2.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_o2.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/content3.jpg" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/liao/ref3.png" alt='None' style="width:320px; height:164; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_a3.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_o3.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/content5.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/liao/ref5.jpg" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_a5.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_o5.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/content6.jpg" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/liao/ref6.png" alt='None' style="width:320px; height:220; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_a6.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_o6.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/content7.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/liao/ref7.png" alt='None' style="width:320px; height:160px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_a7.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_o7.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/content8.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/liao/ref8.png" alt='None' style="width:320px; height:268; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_a8.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_o8.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/content9.jpg" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/liao/ref9.png" alt='None' style="width:320px; height:180; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_a9.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_o9.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/content10.jpg" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/liao/ref10.jpg" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_a10.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_o10.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+               <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/content12.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/liao/ref12.png" alt='None' style="width:320px; height:223px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_a12.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/liao/res_o12.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+       </tbody>
+        </table>
+      </div>
+
+    <p> </p>
+    <p> </p>
+    <p> </p> 
+
+     <div id='arbelot_compare'>
+    <a style="font-size:24px; " name="C3">3. Compared to Arbelot et al. [2017]</a>
+    <a style="font-size:24px;" href="comparison.html#comparison_top">Go to top</a>
+        <table border="0" style="table-layout: fixed; text-align:center; padding-top: 5px;">
+          <tbody>
+            <tr style="font-size:20px; padding-bottom: 10px">
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word;" valign="top">
+                <p>Input</p>
+              </th>
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+                <p>References</p>
+              </th>
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+                <p>Arbelot et al. [2017]</p>
+              </th>
+              <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+                <p>Our Result</p>
+              </th>          
+            </tr>  
+
+            <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/in1.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/autotex/ref1.png" alt='None' style="width:320px; height:320; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_t1.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_o1.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/in2.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/autotex/ref2.png" alt='None' style="width:320px; height:320; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_t2.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_o2.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/in3.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/autotex/ref3.png" alt='None' style="width:320px; height:320; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_t3.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_o3.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/in4.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/autotex/ref4.png" alt='None' style="width:320px; height:320; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_t4.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_o4.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/in5.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/autotex/ref5.png" alt='None' style="width:320px; height:320; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_t5.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_o5.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/in6.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/autotex/ref6.png" alt='None' style="width:320px; height:320; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_t6.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_o6.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/in7.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/autotex/ref7.png" alt='None' style="width:320px; height:320; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_t7.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_o7.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/in9.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/autotex/ref9.png" alt='None' style="width:320px; height:320; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_t9.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_o9.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/in10.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/autotex/ref10.png" alt='None' style="width:320px; height:320; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_t10.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_o10.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/in11.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/autotex/ref11.png" alt='None' style="width:320px; height:320; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_t11.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_o11.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+
+              <tr>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/in8.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                 <a href="">
+                  <img src="comparison/autotex/ref8.png" alt='None' style="width:320px; height:320; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_t8.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              <td halign="center" style="word-wrap: break-word;" valign="top">
+                <a href="">
+                  <img src="comparison/autotex/res_o8.png" alt='None' style="width:320px; margin:2px;">
+                </a>
+              </td>
+              </tr>
+     </tbody>
+        </table>
+      </div>
+
+    <p> </p>
+    <p> </p>
+    <p> </p> 
+
+
+    <div id='shih_compare'>
+  <a style="font-size:24px; " name="C4">4. Compared to Shih et al. [2014]</a>
+  <a style="font-size:24px;" href="comparison.html#comparison_top">Go to top</a>
+      <table border="0" style="table-layout: fixed; text-align:center; padding-top: 5px;">
+        <tbody>
+          <tr style="font-size:20px; padding-bottom: 10px">
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word;" valign="top">
+              <p>Input</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>References</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Shih et al. [2014]</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Our Result</p>
+            </th>          
+          </tr>  
+
+          <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/content5.jpg" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="comparison/portrait/ref5.jpg" alt='None' style="width:320px; height:345; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res_t5.jpg" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res5.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/content6.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="comparison/portrait/ref6.jpg" alt='None' style="width:320px; height:330; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res_t6.jpg" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res6.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+          <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/content1.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="comparison/portrait/ref1.png" alt='None' style="width:320px; height:422; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res_t1.jpg" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res1.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr> 
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/content2.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="comparison/portrait/ref2.png" alt='None' style="width:320px; height:422; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res_t2.jpg" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res2.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr> 
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/content3.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="comparison/portrait/ref3.png" alt='None' style="width:320px; height:425; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res_t3.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res3.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr> 
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/content4.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="comparison/portrait/ref4.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res_t4.jpeg" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/portrait/res4.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+     </tbody>
+      </table>
+    </div>
+
+    <p> </p>
+    <p> </p>
+    <p> </p>   
+  
+  <div id='tong_compare'>
+  <a style="font-size:24px; " name="C5">5. Compared to Tong et al. [2007]</a>
+  <a style="font-size:24px;" href="comparison.html#comparison_top">Go to top</a>
+      <table border="0" style="table-layout: fixed; text-align:center; padding-top: 5px;">
+        <tbody>
+          <tr style="font-size:20px; padding-bottom: 10px">
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word;" valign="top">
+              <p>Input</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>References</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Tong et al. [2007]</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Our Result</p>
+            </th>          
+          </tr>  
+
+          <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/makeup/content.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="comparison/makeup/ref1.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/makeup/res_t1.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/makeup/res_o1.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/makeup/content.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="comparison/makeup/ref2.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/makeup/res_t2.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="comparison/makeup/res_o2.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+            
+      </tbody>
+      </table>
+    </div>
+
+    
+  </body>
+</html>

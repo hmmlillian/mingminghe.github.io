@@ -1,0 +1,243 @@
+
+<html>
+    <head>
+      <title>Progressive Color Transfer with Dense Semantic Correspondences</title>
+  </head>
+    <style type="text/css">
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    li{
+        float: left;
+    }
+
+    li a.nav{
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: #111;
+    }
+    #nav {
+      width: 100%;
+      top:0;
+      position:fixed;
+    }
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+
+  .dropdown .dropbtn {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #aaa;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  </style>
+    
+  <body>
+          <div class="navbar">
+    <a href="index.html"  class='nav' >User Study</a>
+    <div class="dropdown">
+    <button class="dropbtn" >Comparison
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="comparison.html#C1">Compared to Luan et al. 2017 & Mechrez et al. 2017</a>
+      <a href="comparison.html#C2">Compared to Liao et al. [2017]</a>
+      <a href="comparison.html#C3">Compared to Arbelot et al. [2017]</a>
+      <a href="comparison.html#C4">Compared to Shih et al. [2014]</a>
+      <a href="comparison.html#C5">Compared to Tong et al. [2007]</a>
+    </div>
+    </div>
+    <div class="dropdown">
+    <button class="dropbtn" >Extension
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="extension.html#M1">Multi-reference Color Transfer</a>
+      <a href="extension.html#M2">Colorization</a>
+    </div>
+    </div> 
+    <div class="dropdown">
+    <button class="dropbtn">Application
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="application.html#P1">Makeup</a>
+      <a href="application.html#P2">Time Lapse</a>
+    </div>
+    </div>
+    <a href="limitation.html"  class='nav' style="font-weight: bold;">Limitation</a>
+  </div>
+
+
+  <p> </p>
+      <p> </p>
+      <p> </p>
+    <div id='type1'>
+      <a style="font-size:24px;">1. Failure Cases of Type 1</a>
+      <p> </p>
+      <a style="font-size:18px;">(Our method fails to transfer correct colors for the objects which exist in the source but not the reference (like hat in the left example and jeans in the right example).)</a>
+      <table border="0" style="table-layout: fixed; text-align:center; padding-top: 5px;">
+        <tbody>
+          <tr style="font-size:20px; padding-bottom: 10px">
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word;" valign="top">
+              <p>Input</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>References</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Result</p>
+            </th>          
+          </tr>        
+          <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="limitation/content1.jpg" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="limitation/ref1.jpg" alt='None' style="width:256px; height:365px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="limitation/res1.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr> 
+
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="limitation/content2.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="limitation/ref2.png" alt='None' style="width:256px; height:400px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="limitation/res2.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p> </p>
+        <p> </p>
+        <p> </p>
+         
+         <div id='type2'>
+          <a style="font-size:24px; " >2. Failure Cases of Type 2</a>
+          <p> </p>
+          <a style="font-size:18px;">(Our method may mix colors between instances of the same class (like clothes in the left example and cats in the right example).)</a>
+          <table border="0" style="table-layout: fixed; text-align:center; padding-top: 5px;">
+            <tbody>
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="limitation/content3.jpg" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="limitation/ref3.jpg" alt='None' style="width:256px; height:426px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="limitation/res3.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr> 
+            <tr>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="limitation/content4.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+               <a href="">
+                <img src="limitation/ref4.png" alt='None' style="width:256px; height:178px; margin:2px;">
+              </a>
+            </td>
+            <td halign="center" style="word-wrap: break-word;" valign="top">
+              <a href="">
+                <img src="limitation/res4.png" alt='None' style="width:320px; margin:2px;">
+              </a>
+            </td>
+            </tr> 
+      </tbody>
+      </table>
+    </div>
+  </body>
+</html>
