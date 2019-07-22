@@ -1,0 +1,1935 @@
+<html>
+    <head>
+      <title>Progressive Color Transfer with Dense Semantic Correspondences</title>
+  </head>
+    <style type="text/css">
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+
+    li{
+        float: left;
+    }
+
+    li a.nav{
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        background-color: #111;
+    }
+    #nav {
+      width: 100%;
+      top:0;
+      position:fixed;
+    }
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+
+  .dropdown .dropbtn {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #aaa;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  </style>
+    
+  <body>
+     <div class="navbar">
+    <a href="index.html"  class='nav' style="font-weight: bold;">User Study</a>
+    <div class="dropdown">
+    <button class="dropbtn" >Comparison
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="comparison.html#C1">Compared to Luan et al. 2017 & Mechrez et al. 2017</a>
+      <a href="comparison.html#C2">Compared to Liao et al. [2017]</a>
+      <a href="comparison.html#C3">Compared to Arbelot et al. [2017]</a>
+      <a href="comparison.html#C4">Compared to Shih et al. [2014]</a>
+      <a href="comparison.html#C5">Compared to Tong et al. [2007]</a>
+    </div>
+    </div>
+    <div class="dropdown">
+    <button class="dropbtn" >Extension
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="extension.html#M1">Multi-reference Color Transfer</a>
+      <a href="extension.html#M2">Colorization</a>
+    </div>
+    </div> 
+    <div class="dropdown">
+    <button class="dropbtn">Application
+    <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="application.html#P1">Makeup</a>
+      <a href="application.html#P2">Time Lapse</a>
+    </div>
+    </div>
+    <a href="limitation.html"  class='nav'>Limitation</a>
+  </div>
+  
+    <p> </p>
+      <p> </p>
+      <p> </p>
+    <div id='user_study'>
+      <table border="0" style="table-layout: fixed; text-align:center; padding-top: 5px;">
+        <tbody>
+          <tr style="font-size:20px; padding-bottom: 10px">
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word;" valign="top">
+              <p>Source</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Reference</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Pitie et al. [2005]</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Luan et al. [2017]</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Liao et al. [2017]</p>
+            </th>
+            <th colspan="1" halign="center" scope="colgroup" style="word-wrap: break-word; " valign="top">
+              <p>Our Result</p>
+            </th>          
+          </tr>        
+          
+            <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_00.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_00.png" alt = 'None' style = "width:320px; height:180px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_00.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_00.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_00.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_00.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.20(&plusmn 0.79)</p>
+  <p>2.23(&plusmn 0.99)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.60(&plusmn 0.88)</p>
+  <p>2.70(&plusmn 1.22)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.60(&plusmn 0.61)</p>
+  <p>3.00(&plusmn 0.86)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.33(&plusmn 0.65)</p>
+  <p>2.37(&plusmn 0.80)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_01.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_01.png" alt = 'None' style = "width:320px; height:249px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_01.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_01.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_01.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_01.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.00(&plusmn 0.77)</p>
+  <p>2.37(&plusmn 0.95)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.37(&plusmn 1.02)</p>
+  <p>3.03(&plusmn 0.95)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.60(&plusmn 0.99)</p>
+  <p>2.53(&plusmn 0.92)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.73(&plusmn 1.00)</p>
+  <p>2.50(&plusmn 0.96)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_02.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_02.png" alt = 'None' style = "width:320px; height:240px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_02.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_02.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_02.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_02.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.67(&plusmn 1.01)</p>
+  <p>2.80(&plusmn 0.83)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.03(&plusmn 0.95)</p>
+  <p>1.80(&plusmn 0.83)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.90(&plusmn 0.83)</p>
+  <p>2.73(&plusmn 0.85)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.90(&plusmn 0.98)</p>
+  <p>3.20(&plusmn 0.79)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_03.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_03.png" alt = 'None' style = "width:320px; height:240px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_03.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_03.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_03.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_03.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.60(&plusmn 0.49)</p>
+  <p>2.93(&plusmn 0.81)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.43(&plusmn 0.62)</p>
+  <p>1.70(&plusmn 0.64)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.17(&plusmn 0.73)</p>
+  <p>2.23(&plusmn 0.84)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.07(&plusmn 0.73)</p>
+  <p>3.23(&plusmn 0.84)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_04.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_04.png" alt = 'None' style = "width:320px; height:214px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_04.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_04.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_04.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_04.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.07(&plusmn 0.25)</p>
+  <p>1.50(&plusmn 0.67)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.13(&plusmn 0.67)</p>
+  <p>2.53(&plusmn 0.76)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.23(&plusmn 0.62)</p>
+  <p>2.63(&plusmn 0.80)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.73(&plusmn 0.51)</p>
+  <p>3.73(&plusmn 0.51)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_05.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_05.png" alt = 'None' style = "width:320px; height:213px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_05.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_05.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_05.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_05.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.90(&plusmn 1.11)</p>
+  <p>1.47(&plusmn 0.85)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.37(&plusmn 0.87)</p>
+  <p>2.43(&plusmn 0.76)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.80(&plusmn 0.79)</p>
+  <p>3.07(&plusmn 0.73)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.47(&plusmn 0.56)</p>
+  <p>3.60(&plusmn 0.61)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_06.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_06.png" alt = 'None' style = "width:320px; height:193px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_06.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_06.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_06.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_06.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.13(&plusmn 0.85)</p>
+  <p>3.00(&plusmn 0.86)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.30(&plusmn 0.74)</p>
+  <p>2.23(&plusmn 1.05)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.27(&plusmn 0.85)</p>
+  <p>2.03(&plusmn 0.95)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.50(&plusmn 1.02)</p>
+  <p>2.73(&plusmn 1.00)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_07.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_07.png" alt = 'None' style = "width:320px; height:240px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_07.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_07.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_07.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_07.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.17(&plusmn 0.82)</p>
+  <p>2.60(&plusmn 1.05)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.33(&plusmn 0.54)</p>
+  <p>2.03(&plusmn 1.11)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.80(&plusmn 0.65)</p>
+  <p>2.40(&plusmn 0.88)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.37(&plusmn 0.60)</p>
+  <p>3.00(&plusmn 1.03)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_08.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_08.png" alt = 'None' style = "width:320px; height:213px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_08.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_08.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_08.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_08.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.77(&plusmn 0.72)</p>
+  <p>2.23(&plusmn 0.76)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.87(&plusmn 0.34)</p>
+  <p>3.77(&plusmn 0.50)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.50(&plusmn 0.56)</p>
+  <p>1.73(&plusmn 0.68)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.53(&plusmn 0.76)</p>
+  <p>2.33(&plusmn 0.79)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_09.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_09.png" alt = 'None' style = "width:320px; height:237px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_09.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_09.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_09.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_09.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.10(&plusmn 0.91)</p>
+  <p>2.33(&plusmn 0.91)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.33(&plusmn 0.87)</p>
+  <p>2.57(&plusmn 0.92)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.80(&plusmn 0.91)</p>
+  <p>2.53(&plusmn 0.92)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.20(&plusmn 0.87)</p>
+  <p>3.57(&plusmn 0.80)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_10.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_10.png" alt = 'None' style = "width:320px; height:480px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_10.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_10.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_10.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_10.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.27(&plusmn 0.51)</p>
+  <p>1.63(&plusmn 0.75)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.47(&plusmn 0.92)</p>
+  <p>2.47(&plusmn 0.92)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.27(&plusmn 0.77)</p>
+  <p>2.57(&plusmn 0.67)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.70(&plusmn 0.53)</p>
+  <p>3.47(&plusmn 0.85)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_11.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_11.png" alt = 'None' style = "width:320px; height:200px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_11.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_11.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_11.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_11.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.73(&plusmn 1.03)</p>
+  <p>2.33(&plusmn 0.98)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.30(&plusmn 0.64)</p>
+  <p>1.30(&plusmn 0.53)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.13(&plusmn 0.72)</p>
+  <p>1.77(&plusmn 0.80)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.33(&plusmn 0.75)</p>
+  <p>2.90(&plusmn 0.91)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_12.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_12.png" alt = 'None' style = "width:320px; height:240px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_12.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_12.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_12.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_12.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.03(&plusmn 0.18)</p>
+  <p>1.23(&plusmn 0.42)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.00(&plusmn 0.73)</p>
+  <p>2.50(&plusmn 0.92)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.73(&plusmn 0.51)</p>
+  <p>3.20(&plusmn 0.60)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.40(&plusmn 0.61)</p>
+  <p>3.43(&plusmn 0.67)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_13.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_13.png" alt = 'None' style = "width:320px; height:213px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_13.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_13.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_13.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_13.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.37(&plusmn 0.75)</p>
+  <p>2.50(&plusmn 0.62)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.40(&plusmn 0.71)</p>
+  <p>1.57(&plusmn 0.76)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.37(&plusmn 0.75)</p>
+  <p>3.63(&plusmn 0.48)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.30(&plusmn 0.59)</p>
+  <p>2.57(&plusmn 0.80)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_14.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_14.png" alt = 'None' style = "width:320px; height:180px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_14.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_14.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_14.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_14.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.83(&plusmn 0.78)</p>
+  <p>2.13(&plusmn 0.88)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.00(&plusmn 0.89)</p>
+  <p>2.07(&plusmn 0.89)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.83(&plusmn 0.78)</p>
+  <p>2.77(&plusmn 0.84)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.20(&plusmn 0.83)</p>
+  <p>3.50(&plusmn 0.67)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_15.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_15.png" alt = 'None' style = "width:320px; height:423px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_15.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_15.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_15.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_15.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.43(&plusmn 1.12)</p>
+  <p>1.67(&plusmn 0.83)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.50(&plusmn 0.89)</p>
+  <p>2.80(&plusmn 0.83)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.10(&plusmn 0.94)</p>
+  <p>2.40(&plusmn 0.92)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.30(&plusmn 0.59)</p>
+  <p>3.40(&plusmn 0.61)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_16.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_16.png" alt = 'None' style = "width:320px; height:213px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_16.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_16.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_16.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_16.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.40(&plusmn 0.84)</p>
+  <p>2.23(&plusmn 0.92)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.43(&plusmn 1.05)</p>
+  <p>3.30(&plusmn 0.90)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.83(&plusmn 0.93)</p>
+  <p>2.50(&plusmn 0.92)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.70(&plusmn 0.90)</p>
+  <p>2.73(&plusmn 0.81)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_17.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_17.png" alt = 'None' style = "width:320px; height:213px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_17.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_17.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_17.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_17.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.83(&plusmn 0.82)</p>
+  <p>2.20(&plusmn 0.98)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.90(&plusmn 0.75)</p>
+  <p>2.20(&plusmn 0.91)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.63(&plusmn 0.48)</p>
+  <p>3.13(&plusmn 0.88)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.27(&plusmn 0.77)</p>
+  <p>2.77(&plusmn 1.05)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_18.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_18.png" alt = 'None' style = "width:320px; height:196px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_18.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_18.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_18.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_18.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.57(&plusmn 0.96)</p>
+  <p>1.80(&plusmn 0.87)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.57(&plusmn 0.80)</p>
+  <p>2.40(&plusmn 0.80)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.77(&plusmn 0.62)</p>
+  <p>2.03(&plusmn 0.75)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.90(&plusmn 0.65)</p>
+  <p>3.23(&plusmn 0.67)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_19.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_19.png" alt = 'None' style = "width:320px; height:214px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_19.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_19.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_19.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_19.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.73(&plusmn 0.93)</p>
+  <p>2.57(&plusmn 0.84)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.73(&plusmn 1.12)</p>
+  <p>3.17(&plusmn 1.00)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.20(&plusmn 0.75)</p>
+  <p>2.77(&plusmn 0.84)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.00(&plusmn 0.86)</p>
+  <p>2.80(&plusmn 0.91)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_20.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_20.png" alt = 'None' style = "width:320px; height:242px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_20.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_20.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_20.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_20.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.47(&plusmn 0.81)</p>
+  <p>1.23(&plusmn 0.50)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.10(&plusmn 0.79)</p>
+  <p>2.30(&plusmn 0.64)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.77(&plusmn 0.67)</p>
+  <p>2.43(&plusmn 0.84)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.53(&plusmn 0.81)</p>
+  <p>3.57(&plusmn 0.62)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_21.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_21.png" alt = 'None' style = "width:320px; height:240px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_21.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_21.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_21.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_21.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.77(&plusmn 0.67)</p>
+  <p>1.93(&plusmn 0.73)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.50(&plusmn 0.62)</p>
+  <p>1.23(&plusmn 0.42)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.30(&plusmn 0.64)</p>
+  <p>2.60(&plusmn 0.80)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.70(&plusmn 0.53)</p>
+  <p>3.43(&plusmn 0.67)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_22.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_22.png" alt = 'None' style = "width:320px; height:213px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_22.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_22.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_22.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_22.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.40(&plusmn 1.02)</p>
+  <p>2.53(&plusmn 0.88)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.17(&plusmn 0.37)</p>
+  <p>1.47(&plusmn 0.72)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.67(&plusmn 0.60)</p>
+  <p>2.93(&plusmn 0.63)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.47(&plusmn 0.85)</p>
+  <p>3.33(&plusmn 0.79)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_23.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_23.png" alt = 'None' style = "width:320px; height:213px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_23.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_23.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_23.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_23.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.87(&plusmn 0.92)</p>
+  <p>2.00(&plusmn 1.03)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.13(&plusmn 0.67)</p>
+  <p>2.10(&plusmn 0.70)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.27(&plusmn 0.73)</p>
+  <p>3.17(&plusmn 0.69)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.43(&plusmn 0.62)</p>
+  <p>3.17(&plusmn 0.69)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_24.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_24.png" alt = 'None' style = "width:320px; height:240px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_24.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_24.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_24.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_24.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.70(&plusmn 0.82)</p>
+  <p>2.77(&plusmn 0.76)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.30(&plusmn 1.07)</p>
+  <p>3.13(&plusmn 1.12)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.00(&plusmn 0.82)</p>
+  <p>1.87(&plusmn 0.81)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.97(&plusmn 0.91)</p>
+  <p>2.23(&plusmn 0.76)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_25.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_25.png" alt = 'None' style = "width:320px; height:423px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_25.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_25.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_25.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_25.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.30(&plusmn 0.97)</p>
+  <p>1.80(&plusmn 0.95)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.47(&plusmn 0.56)</p>
+  <p>2.13(&plusmn 0.96)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.73(&plusmn 0.81)</p>
+  <p>2.50(&plusmn 0.89)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.37(&plusmn 0.80)</p>
+  <p>3.60(&plusmn 0.61)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_26.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_26.png" alt = 'None' style = "width:320px; height:200px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_26.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_26.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_26.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_26.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.53(&plusmn 0.88)</p>
+  <p>2.43(&plusmn 0.84)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.10(&plusmn 1.01)</p>
+  <p>2.10(&plusmn 0.87)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.77(&plusmn 0.62)</p>
+  <p>2.80(&plusmn 0.91)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.50(&plusmn 0.96)</p>
+  <p>3.10(&plusmn 1.08)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_27.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_27.png" alt = 'None' style = "width:320px; height:300px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_27.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_27.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_27.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_27.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.43(&plusmn 0.72)</p>
+  <p>3.03(&plusmn 0.87)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.27(&plusmn 0.51)</p>
+  <p>2.07(&plusmn 1.06)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.70(&plusmn 0.90)</p>
+  <p>1.50(&plusmn 0.62)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.50(&plusmn 0.89)</p>
+  <p>2.77(&plusmn 0.96)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_28.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_28.png" alt = 'None' style = "width:320px; height:214px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_28.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_28.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_28.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_28.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.33(&plusmn 0.60)</p>
+  <p>3.57(&plusmn 0.62)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.40(&plusmn 0.71)</p>
+  <p>1.33(&plusmn 0.60)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.67(&plusmn 0.60)</p>
+  <p>1.93(&plusmn 0.63)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.53(&plusmn 0.62)</p>
+  <p>2.87(&plusmn 0.76)</p>
+  </th>
+  </tr>
+  <tr>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/in_29.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/tar_29.png" alt = 'None' style = "width:320px; height:180px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/global_29.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/deep_29.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/analogy_29.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  <td halign = "center" style = "word-wrap: break-word;" valign = "top">
+  <a href = "">
+  <img src = "user_study/our_29.png" alt = 'None' style = "width:320px; margin:2px;">
+  </a>
+  </td>
+  </tr>
+
+  <tr style = "font-size:15px; padding-bottom: 10px">
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word;" valign = "top">
+  <p>Photorealistic Score</p>
+  <p>Faithful to Style Score</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p></p>
+  <p></p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.97(&plusmn 0.71)</p>
+  <p>3.07(&plusmn 0.73)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>1.50(&plusmn 0.50)</p>
+  <p>2.10(&plusmn 0.94)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>2.43(&plusmn 0.80)</p>
+  <p>2.47(&plusmn 0.88)</p>
+  </th>
+  <th colspan = "1" halign = "center" scope = "colgroup" style = "word-wrap: break-word; " valign = "top">
+  <p>3.63(&plusmn 0.48)</p>
+  <p>3.20(&plusmn 0.79)</p>
+  </th>
+  </tr>  
+      </tbody>
+      </table>
+    </div>
+	</body>
+</html>
