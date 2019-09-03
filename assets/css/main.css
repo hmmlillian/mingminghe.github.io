@@ -141,7 +141,7 @@ td h3 strong {
 		color: #787878;
 		font-weight: 400;
 		line-height: 1em;
-		margin: 0 0 1em 0;
+		margin: 0 0 0 0;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
@@ -2351,7 +2351,7 @@ td h3 strong {
 	}
 
 	table {
-		margin: 0 0 2em 0;
+		margin: 0 0 0.5em 0;
 		width: 100%;
 	}
 
@@ -2665,15 +2665,15 @@ td h3 strong {
 
 	#main {
 		margin-left: 35%;
-		max-width: 54em;
+		max-width: 60em;
 		padding: 8em 4em 4em 4em;
 		width: calc(100% - 35%);
 	}
 
 		#main > section {
 			border-top: solid 2px #efefef;
-			margin: 4em 0 0 0;
-			padding: 4em 0 0 0;
+			margin: 2em 0 0 0;
+			padding: 1em 0 0 0;
 		}
 
 			#main > section:first-child {
