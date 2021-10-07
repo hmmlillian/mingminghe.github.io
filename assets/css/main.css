@@ -162,6 +162,7 @@ td h3 strong {
 	h3 {
 		font-size: 1.25em;
 		line-height: 1.5em;
+		text-align: justify;
 	}
 
 	h4 {
@@ -2574,11 +2575,11 @@ td h3 strong {
 		-ms-justify-content: space-between;
 		justify-content: space-between;
 		background-color: #1f1815;
-		background-attachment: scroll,								scroll;
+		background-attachment: fixed,								local;
 		background-image: url("images/overlay.png"), url("../../images/bg.jpg");
 		background-position: top left,							top left;
-		background-repeat: repeat,								no-repeat;
-		background-size: auto,								150%;
+		background-repeat: repeat,								repeat;
+		background-size: auto,								auto;
 		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
@@ -3192,4 +3193,10 @@ td h3 strong {
 .Papers {
 }
 #two {
+}
+
+.PaperDiv {
+  text-align: left;
+  position: relative;
+  left: 15px;
 }
